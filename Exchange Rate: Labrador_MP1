@@ -11,6 +11,7 @@ int main(){
 	bool again = true;
 	char tryAgain;
 	double totalUSD[3], totalEUR[3], totalJPY[3], totalGBP[3];
+	while(again == true){
 	cout << "Base Currecy: PHP\n" << endl;
 	for(int i=0; i<3; i++){		//Print of Exchange Rates
 		cout << year[i] << endl;
@@ -21,7 +22,6 @@ int main(){
 		cout << endl;
 	}
 	
-	while(again == true){
 	cout << "Enter amount in PHP: "; 
 	while(cin >> php){	//Validation if the user input proper data needed.
     	if (php>0){		
@@ -47,7 +47,7 @@ int main(){
     	cin >> tryAgain;
     		if(tryAgain == 'y'||tryAgain == 'Y'){
                 again = true;
-               
+                system("cls");
     		}
     		else if(tryAgain == 'n'||tryAgain == 'N'){
     			system("cls");
@@ -55,5 +55,6 @@ int main(){
     		    break;
    			}
 	}
+	system("pause>0");
 	return 0;
 }
