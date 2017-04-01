@@ -1,0 +1,12 @@
+#include <iostream>
+#include <stdlib.h>
+#include <ctime>
+using namespace std;
+
+int main(){ 
+	int x=0;
+	cout << "Enter an Integer: ";
+	cin >> x;
+	srand(static_cast<int>(time(0))); //iba na ang ginegenerate na value kada input ng same value.
+	cout<<rand();
+}
