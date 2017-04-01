@@ -1,0 +1,6 @@
+Enter N: 6 
+Enter M: 45 //6 na number ang ic-cout na galing sa 45
+
+user combination:10 2 3 8 1 6 
+winning combination: 1 7 15 6 8 9
+number of match numbers: 3
