@@ -1,0 +1,99 @@
+#include <iostream>
+using namespace std;
+
+void mainMenu(){
+	cout << "=====================" << endl;
+	cout << " OPERATION ELEMENTS" << endl;
+	cout << "1. Create Element" << endl; 
+	cout << "2. Edit Element" << endl;
+	cout << "3. View Element" << endl;
+	cout << "4. Delete Element" << endl;
+	cout << "=====================" << endl;
+}
+
+int cElement (int numElement){
+	int inElement[numElement];
+	system("cls");
+	mainMenu();
+	cout << "1. Create Element" << endl << endl;
+	cout << "Enter number of element: ";
+	cin >> numElement;
+	
+	for(int i = 0; i<numElement; ++i){
+		cout << "Element " << i+1 << ": ";
+		cin >> inElement[i];
+	}
+}
+
+int mElement (int moElement){
+	int *nElement;
+	int numElement; 
+	int inElement[numElement];
+	system("cls");
+	mainMenu();
+	cout << "2. Modify Element" << endl << endl;
+	cout << "Which element you want to modify? ";
+	cin >> numElement;
+	cout << endl;
+	cout << "Enter your new input for element " << numElement <<": ";
+	cin >> moElement;
+	
+	nElement = &inElement[numElement];
+	*nElement = moElement;
+}
+
+void vElement(int inElement[]){
+	int numElement;
+	system("cls");
+	mainMenu();
+	cout << "3. View Element" << endl << endl;
+	
+	for(int i = 0; i<numElement; ++i){
+		cout << inElement[i] << endl;
+	}
+}
+
+
+int main(){
+	int numElement, moElement, choice;
+	int inElement[numElement];
+	char tryAgain;
+	bool again = true;
+	
+	while(again==true){
+	mainMenu();
+	cin >> choice;
+	switch(choice){
+		case(1):
+			{
+				cElement (numElement); //1. Create Element
+				break;
+			}
+		case(2):
+			{
+				mElement (moElement);
+				break;
+			}
+		case(3):
+			{
+				vElement (inElement);
+				break;
+			}
+		case(4):
+			{
+				cout << "4. Delete Element";
+				break;
+			}
+		}
+	
+	cout << "Would you like to try Again? [Y/N]: ";
+	cin >> tryAgain;
+	if(tryAgain == 'Y'||tryAgain == 'y'){
+		system("cls");
+		again = true;
+		}
+	else{
+		system("pause");
+		}
+	}
+}
