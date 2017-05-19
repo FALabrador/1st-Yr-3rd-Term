@@ -1,0 +1,48 @@
+#include <iostream>
+using namespace std;
+
+struct distance{
+	float feet;
+	float inch;
+}dis[2];
+
+int main(){
+	float totalFeet, totalInches, x, y;
+	cout << "DISTANCE CALCULATOR" << endl;
+	for(int i=0; i<2; i++){
+		cout << "Input " << i+1 << endl;
+		cout << "Feet: ";
+		cin >> dis[i].feet;
+		cout << "Inches: ";
+		cin >> dis[i].inch; 
+	}
+	
+	for(int i=0; i<2; i++){
+		totalFeet+=dis[i].feet;
+		totalInches+=dis[i].inch;
+	}
+	
+	if(totalInches>11){
+		x=totalInches/12;
+		y=x*12;
+		totalFeet+=x;
+		totalInches-=y;
+		goto result;
+	}
+	
+	result:
+	cout << "\nSum of distance: " << endl;
+	
+	if(totalFeet==1){
+		cout << "\t" << totalFeet << " foot, "; 
+		if(totalInches==1){
+			cout << totalInches << " inch.";
+		}
+	}
+	else if(totalFeet>=2){
+		cout << "\t" << totalFeet << " feet, ";
+		if(totalInches>=2){
+			cout << totalInches << " inches.";
+		}
+	}
+}
