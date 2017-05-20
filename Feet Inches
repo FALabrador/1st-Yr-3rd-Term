@@ -2,19 +2,30 @@
 using namespace std;
 
 struct distance{
-	float feet;
-	float inch;
+	double feet;
+	double inch;
 }dis[2];
 
 int main(){
-	float totalFeet, totalInches, x, y;
+	double totalFeet, totalInches, x, y;
+	int z = 12;
+	again:
+	system("cls");
 	cout << "DISTANCE CALCULATOR" << endl;
 	for(int i=0; i<2; i++){
 		cout << "Input " << i+1 << endl;
 		cout << "Feet: ";
 		cin >> dis[i].feet;
 		cout << "Inches: ";
-		cin >> dis[i].inch; 
+		cin >> dis[i].inch;
+		if((dis[i].feet<1)||(dis[i].inch<1)){
+			system("cls");
+			cout << "Invalid Input" << endl;
+			cout << "press ENTER to try again" << endl;
+			system("pause>0");
+			goto again;
+			system("cls");
+		}
 	}
 	
 	for(int i=0; i<2; i++){
@@ -22,27 +33,29 @@ int main(){
 		totalInches+=dis[i].inch;
 	}
 	
-	if(totalInches>11){
-		x=totalInches/12;
-		y=x*12;
+	if(totalInches>=z){
+		x=totalInches/z;
+		y=x*z;
 		totalFeet+=x;
 		totalInches-=y;
 		goto result;
 	}
-	
+	else{
 	result:
 	cout << "\nSum of distance: " << endl;
 	
 	if(totalFeet==1){
-		cout << "\t" << totalFeet << " foot, "; 
+		cout << "\t" << totalFeet << " foot "; 
 		if(totalInches==1){
-			cout << totalInches << " inch.";
+			cout << ", " << totalInches << " inch.";
 		}
 	}
 	else if(totalFeet>=2){
-		cout << "\t" << totalFeet << " feet, ";
+		cout << "\t" << totalFeet << " feet ";
 		if(totalInches>=2){
-			cout << totalInches << " inches.";
+			cout << ", " << totalInches << " inches.";
 		}
+	}
+	system("pause>0");
 	}
 }
