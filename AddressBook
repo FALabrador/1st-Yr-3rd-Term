@@ -1,0 +1,344 @@
+#include <iostream>
+#include <string>
+#include <windows.h>
+using namespace std;
+
+int mainMenu();
+void newInfo();
+void editInfo(int j);
+int sssValid();
+void dataToFile();
+
+struct addressBook{
+	char sss[9];
+	char fName[31];
+	char lName[31];
+	char address[31];
+	char city[31];
+	char state[31];
+	char province[31];
+	char postal[5];
+	char status[2] = {'A','D'};
+	char tryAgain;
+}info, data[100], misc, valid;
+
+int account = 0;
+
+int main(){
+	int j, response;
+	Top:
+	mainMenu();
+	cin >> response;
+	switch(response){
+		case 1: {
+			newInfo();
+			break;
+		}
+		case 2:{
+			editInfo(j);
+			break;
+		}
+
+		case 3:{
+			
+			break;
+		}
+
+		case 4:{
+			
+			break;
+		}
+
+		case 5:{
+			Sleep(3000);
+			cout << "Thank you for using our addressbook" << endl;
+			cout << "  //Made by Labrador & Pastorfide  " << endl;
+			Sleep(500);
+			return 0;
+			break;
+			}
+			
+		default:{
+			cout << "Invalid input" << endl;
+			break;
+			}
+		}
+	}
+
+int mainMenu(){
+	system("cls");
+	cout << "=======ADDRESS BOOK=======" << endl;
+	cout << "= [1] Create New Contact =" << endl;
+	cout << "= [2] Edit Contact       =" << endl;
+	cout << "= [3] Deactivate Contact =" << endl;
+	cout << "= [4] Search Contact     =" << endl;
+	cout << "= [5] Exit               =" << endl;
+	cout << "======NO OF ACCOUNTS======" << endl;
+		if(account>=1){
+			cout << "=            " << account << "           ="<< endl;
+		}
+		else if(account==0){
+			cout << "=       NO CONTACT       =" << endl;
+		}
+	cout << "==========================" << endl;
+	cout << ">> ";
+}
+
+void newInfo(){
+	system("cls");
+	cout << "======================[1] Create New Contact========================" << endl;
+	cout << "= SSS number must contain 8 digits and must start with even number =" << endl;
+	cout << "=          Every required INFO only accepts 30 characters          =" << endl;
+	cout << "=             POSTAL CODE should only consist 4 digits             =" << endl;
+	cout << "====================================================================" << endl << endl;
+		sss:
+		cout << "SSS Number: ";
+		cin >> info.sss;														//SSS Validation Line 95-116
+			/*if(account>0){
+				for(int i=0;i<100;i++){
+					if(strcmp(info.sss,data[i].sss)==0){
+					cout<<"SSS number already exist."<<endl;					//If SSS already exist.					
+					goto sss;
+					}
+				}
+			}*/
+			if(strlen(info.sss)!=8){
+				cout << "SSS number must consist 8 digits." << endl;			//If input less or greater than 8 digits.
+				goto sss;
+			}
+			else if(info.sss[0]%2==1){
+				cout<<"SSS 1st number must start with even number."<<endl;		//If SSS no even number.
+				goto sss;
+			}
+			for(int i=0;i<8;i++){
+				if(isdigit(info.sss[i])!=1){
+				cout<<"SSS number must only contain numbers."<<endl;			//If SSS contains other kinds of characters.
+				goto sss;
+				}
+			}
+				cin.ignore();
+				cout << "First Name: ";
+				cin.getline(info.fName,30);
+				cout << "Last Name: ";
+				cin.getline(info.lName,30);
+				cout << "Address: ";
+				cin.getline(info.address,30);
+				cout << "City: ";
+				cin.getline(info.city,30);
+				cout << "State: ";
+				cin.getline(info.state,30);
+				cout << "Province: ";
+				cin.getline(info.province,30);
+				postal:
+				cout << "Postal Code: ";
+				cin.getline(info.postal,4);									// wala pang validation for postal.
+					
+			for(int j=0; j<30; j++){										//Every entered information is going to
+				data[account].sss[j]=info.sss[j];							//be stored in the program.
+				data[account].postal[j]=info.postal[j];
+				data[account].fName[j]=info.fName[j];
+				data[account].lName[j]=info.lName[j];
+				data[account].address[j]=info.address[j];
+				data[account].city[j]=info.city[j];
+				data[account].state[j]=info.state[j];
+				data[account].province[j]=info.province[j];
+			} 
+		
+		cout << "\n\nInput basic information complete." << endl;
+		cout << "Status: " << data[account].status[0] << endl << endl;
+		account++;
+		
+}
+
+void editInfo(int j){
+	char wew;
+	int choice;
+	sssValid();
+	edit:
+	cout << "=========================[2] Edit Contact===========================" << endl;
+	cout << "=                      Remember when editing                       =" << endl;
+	cout << "= SSS number must contain 8 digits and must start with even number =" << endl;
+	cout << "=          Every required INFO only accepts 30 characters          =" << endl;
+	cout << "=             POSTAL CODE should only consist 4 digits             =" << endl;
+	cout << "==================CHOOSE THE PART YOU WANT TO EDIT==================" << endl;
+	cout << "=                 1. SSS number                                    =" << endl;
+	cout << "=                 2. First name                                    =" << endl;
+	cout << "=                 3. Last name                                     =" << endl;
+	cout << "=                 4. Address                                       =" << endl;
+	cout << "=                 5. City                                          =" << endl;
+	cout << "=                 6. State                                         =" << endl;
+	cout << "=                 7. Province                                      =" << endl;
+	cout << "=                 8. Postal code                                   =" << endl;
+	cout << "=                 9. Cancel                                        =" << endl;
+	cout << "====================================================================" << endl;
+	cout << ">> ";
+	cin >> choice;
+	
+	switch(choice){
+		case 1:{
+			sss:
+				cout << "Enter you new SSS number: ";
+				cin >> info.sss;
+
+				for(int i=0;i<100;i++){
+					if(strcmp(info.sss,data[i].sss)==0){
+					cout<<"SSS number already exist."<<endl;					//If SSS already exist.					
+					goto sss;
+					}
+				}
+				if(strlen(info.sss)!=8){
+					cout << "SSS number must consist 8 digits." << endl;			//If input less or greater than 8 digits.
+					goto sss;
+				}
+				else if(info.sss[0]%2==1){
+					cout<<"SSS 1st number must start with even number."<<endl;		//If SSS no even number.
+					goto sss;
+				}
+				for(int i=0;i<8;i++){
+					if(isdigit(info.sss[i])!=1){
+						cout<<"SSS number must only contain numbers."<<endl;			//If SSS contains other kinds of characters.
+						goto sss;
+					}
+				}
+			
+				cout << "Successfully Edited SSS Number!" << endl;
+			break;
+		}
+		case 2:{
+			first:
+				cout << "Enter your new FIRST NAME: ";
+				cin.getline(info.fName,30);
+				
+				cout << "Successfully Edited First Name!" << endl;
+			break;
+		}
+		case 3:{
+				cout << "Enter your new SURNAME: ";
+				cin.getline(info.fName,30);
+				
+				cout << "Successfully Edited First Name!" << endl;
+			break;
+		}
+		case 4:{
+				cout << "Enter your new ADDRESS: ";
+				cin.getline(info.address,30);
+				
+				cout << "Successfully Edited Address!" << endl;
+			break;
+		}
+		case 5:{
+				cout << "Enter your new CITY: ";
+				cin.getline(info.city,30);
+				
+				cout << "Successfully Edited CITY!" << endl;
+			break;
+		}
+		case 6:{
+				cout << "Enter your new STATE: ";
+				cin.getline(info.state,30);
+				
+				cout << "Successfully Edited STATE" << endl;
+			break;
+		}
+		case 7:{
+				cout << "Enter your new PROVINCE: ";
+				cin.getline(info.province,30);
+				
+				cout << "Successfully Edited PROVINCE!" << endl;
+			break;
+		}
+		case 8:{
+				cout << "Enter your new POSTAL CODE: ";
+				cin.getline(info.postal,4);
+				
+				cout << "Successfully Edited POSTAL CODE!" << endl;
+			break;
+		}
+		case 9:{
+				system("cls");
+				mainMenu();
+			break;
+		}
+		default:{
+				cout << "Invalid input!";
+				system("cls");
+				goto edit;
+			break;
+		}
+	}
+	
+	for(int j=0; j<30; j++){										//Every entered information is going to
+				data[account].sss[j]=info.sss[j];							//be stored in the program.
+				data[account].postal[j]=info.postal[j];
+				data[account].fName[j]=info.fName[j];
+				data[account].lName[j]=info.lName[j];
+				data[account].address[j]=info.address[j];
+				data[account].city[j]=info.city[j];
+				data[account].state[j]=info.state[j];
+				data[account].province[j]=info.province[j];
+	
+	cout << "Editing Basic Information complete!" << endl;
+	cout << "would you like to edit another account [Y or N]: ";
+	cin >> wew;
+	if((wew=='Y')||(wew=='y')){
+		system("cls");
+		goto edit;
+	}
+	else{
+		system("cls");
+		mainMenu();
+	}
+	}
+}
+
+int sssValid(){
+	int tryCount = 3;
+	again:
+	cout << ">> Login" << endl;
+	cout << "   Enter your SSS number: ";
+	cin >> valid.sss;
+	for(int i=0;i<100;i++)
+		{
+			if(strcmp(valid.sss,data[i].sss)==0)
+			{
+				return i;
+			}
+			else if(strcmp(valid.sss,data[i].sss)==1)
+			{
+				cout<<"SSS number not found. Please try again."<<endl;
+				tryCount--;
+				goto again;
+			}
+		}
+	if(tryCount==0){
+		cout << "Sorry you have don't have enough tries the program will now terminate" << endl;
+		Sleep(3000);
+		system("cls");
+		return 0;
+	}
+}
+
+void dataToFile{
+	string data;
+	char fileName = {"addressBook.txt"};
+	cout << "Enter Filename: ";
+	cin.getline(fileName,100);
+	ifstream inputFile(fileName);
+	if(inputFile.is_open()){
+		outputFile << "==========ADDRESS BOOK==========";
+		for(int j=0; j<30; j++){ 
+			outputFile << "================================" << "\n";
+			outputFile << "SSS Number: " << info.sss[j] << "\n";							//be stored in the program.
+			outputFile << "First Name: " << info.fName[j] << "\n";
+			outputFile << "Last Name: " << info.lName[j] << "\n";
+			outputFile << "Address: " << info.address[j] << "\n";
+			outputFile << "City: " << info.city[j] << "\n";
+			outputFile << "State: " << info.state[j] << "\n";
+			outputFile << "Province: " <<info.province[j] << "\n";
+			outputFile << "Postal Code: " << info.postal[j] << "\n";
+		}
+	}
+	} else{
+		cout << "File named (" << fileName << ") does not exist."<<  endl; 
+	}
+}
